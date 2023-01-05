@@ -1,0 +1,10 @@
+class SnakeGame 
+
+field Snake snake; 
+field int currentDirection;
+field int destDirection;
+
+
+constructor  NakedGame new(){
+    return this;
+}

@@ -1,0 +1,11 @@
+class Main {
+
+    /** Initializes a new game and starts it. */    
+    function void main() {
+        var SnakeGame game;
+        let game = snakeGame.new();
+        do game.run();
+	    do game.dispose();
+        return;
+    }
+}
