@@ -1,10 +1,54 @@
-class SnakeGame 
+class SnakeGame{
 
-field Snake snake; 
-field int currentDirection;
-field int destDirection;
+    field Snake snake; // the snake of this game
+    field int direction; // the square's current direction: 
+                        // 0=none, 1=up, 2=down, 3=left, 4=right
+    field Square square;
+    field int index;
+
+   /** Constructs a new Snake Game. */
+   constructor SnakeGame new() {
+      
 
 
-constructor  NakedGame new(){
-    return this;
+
+
+      let snake = Snake.new();
+      let direction = 0;  // initial state is no movement
+      let index = 0;
+      return this;
+   }
+
+   /** Disposes this game. */
+   method void dispose() {
+      do square.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }
+
+    method void run(){
+        var char key; 
+        var boolean exit;
+        let exit = false;
+
+      while(~ (exit)){
+            while(key = 0){
+               let key = Keyboard.keyPressed();
+               do snake.move();
+            }
+            if (key = 81)  { let exit = true; }     // q key
+            if (key = 131) { let direction = 1; }   // up arrow
+            if (key = 133) { let direction = 2; }   // down arrow
+            if (key = 130) { let direction = 3; }   // left arrow
+            if (key = 132) { let direction = 4; }   // right arrow
+            while (~(key = 0)) {
+               let key = Keyboard.keyPressed();
+               do snake.setCurrentDirection(direction);
+               do snake.move();
+               do Sys.wait(5);
+
+        }
+      }
+      return;
+    }
 }

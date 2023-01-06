@@ -1,10 +1,134 @@
-class SnakeGame 
+class Snake {
 
-field Snake snake; 
-field int currentDirection;
-field int destDirection;
+field Array arrX;
+field Array arrY;
+field int length;
+field int headDirection;
+field int prevDirection;
+field int indexDirection;
+field int size;
+field int locationHeadX;
+field int locationHeadY;
+field int index;
+field int firstCycle;
 
 
-constructor  NakedGame new(){
-    return this;
+
+    constructor Snake new(){
+        let arrX = Array.new(512);
+        let arrY = Array.new(512);
+        let length = 0;
+        let size = 10;
+        do insertCell(0,0);
+        let headDirection =0;
+        let prevDirection = 0;
+        let indexDirection = 0;
+        let firstCycle = 0;
+
+        return this; 
+    }
+
+    method void insertCell(int x, int y){
+        let arrX[length] = x;
+        let arrY[length] = y;
+        do drawSnakeBit(x,y);
+        let length = length+1;
+        return;
+    }
+
+    // method void printSnakeAtIndex(int index){
+    //     do Square.new(arrX[index],arrY[index], size);
+    //     return;
+    // }
+
+    method void storeHeadLocation(){
+        let locationHeadX = arrX[0];
+        let locationHeadY = arrY[0];
+        return;
+    }  
+
+    method void setCurrentDirection(int newDirection){
+
+        if (~(newDirection = headDirection )){
+            // start change from the head;
+            let index = 0;
+        }
+        let prevDirection = headDirection;
+        let headDirection = newDirection; 
+        // do storeHeadLocation();
+        return;
+    }
+
+        
+    // method void setCurrentDirection(int newDirection){
+
+    //     if (~(newDirection = headDirection )){
+    //         // start change from the head;
+    //         let index = 0;
+    //     }
+    //    if(locationHeadX = arrX[index] & locationHeadY = arrY[index] | firstCycle=0){
+    //         let indexDirection = newDirection;
+    //         let firstCycle =1;
+    //    } 
+    //     // do storeHeadLocation();
+    //     return;
+    // }
+
+
+    method void move(){
+        var int indexX;
+        var int indexY;
+        let indexX = arrX[index];
+        let indexY = arrY[index];
+        
+            //if the indexX has not yet reached the chaging point
+           if ((indexX =locationHeadX) & (indexY =locationHeadY)  ){
+                let indexDirection = prevDirection;
+           }else {
+                let indexDirection = headDirection;
+           } 
+        
+        if(indexDirection = 1) {do moveUp();} 
+        if(indexDirection = 2) {do moveDown();} 
+        if(indexDirection = 3) {do moveLeft();} 
+        if(indexDirection = 4) {do moveRight();}
+        return;
+    }
+
+    method void moveUp(){
+        let arrY[index] = arrY[index]-size;
+        do drawSnakeBit(arrX[index],arrY[index]);
+        return ;}
+
+    method void moveLeft(){
+        let arrX[index] = arrX[index]-size;
+        do drawSnakeBit(arrX[index],arrY[index]);
+        return ;}    
+    
+    method void moveRight(){
+        let arrX[index] = arrX[index]+size;
+        do drawSnakeBit(arrX[index],arrY[index]);
+        return ;}
+
+    method void moveDown(){
+        let arrY[index] = arrY[index]+size;
+        do drawSnakeBit(arrX[index],arrY[index]);
+        return ;
+        }
+
+    
+    method void drawSnakeBit(int x, int y) {  
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x+size, y+size);
+        do Sys.wait(15);
+        return;
+    }
+
+    // clears a block and marks that block as not occupied
+    method void clearSnakeBit(int x, int y) {
+        do Screen.setColor(false);
+         do Screen.drawRectangle(x, y, x+size, y+size);
+        return;
+    } 
+
 }
